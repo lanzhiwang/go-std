@@ -1,0 +1,89 @@
+$ go version
+go version go1.18.1 darwin/amd64
+
+
+$ go help gopath-get
+The 'go get' command changes behavior depending on whether the
+go command is running in module-aware mode or legacy GOPATH mode.
+This help text, accessible as 'go help gopath-get' even in module-aware mode,
+describes 'go get' as it operates in legacy GOPATH mode.
+“go get”命令根据是否
+go 命令正在模块感知模式或传统 GOPATH 模式下运行。
+这个帮助文本，即使在模块感知模式下也可以作为“go help gopath-get”访问，
+描述“go get”，因为它在传统 GOPATH 模式下运行。
+
+Usage: go get [-d] [-f] [-t] [-u] [-v] [-fix] [build flags] [packages]
+
+Get downloads the packages named by the import paths, along with their
+dependencies. It then installs the named packages, like 'go install'.
+Get 下载由导入路径命名的包，以及它们的
+依赖项。 然后它会安装指定的包，例如“go install”。
+
+The -d flag instructs get to stop after downloading the packages; that is,
+it instructs get not to install the packages.
+-d 标志指示 get 在下载包后停止； 那是，
+它指示不要安装软件包。
+
+The -f flag, valid only when -u is set, forces get -u not to verify that
+each package has been checked out from the source control repository
+implied by its import path. This can be useful if the source is a local fork
+of the original.
+-f 标志，仅在设置 -u 时有效，强制 get -u 不验证
+每个包都已从源代码控制存储库中检出
+由其导入路径暗示。 如果源是本地分支，这可能很有用
+原来的。
+
+The -fix flag instructs get to run the fix tool on the downloaded packages
+before resolving dependencies or building the code.
+-fix 标志指示 get 在下载的包上运行修复工具
+在解决依赖关系或构建代码之前。
+
+The -t flag instructs get to also download the packages required to build
+the tests for the specified packages.
+-t 标志指示 get 还下载构建所需的包
+指定包的测试。
+
+The -u flag instructs get to use the network to update the named packages
+and their dependencies. By default, get uses the network to check out
+missing packages but does not use it to look for updates to existing packages.
+-u 标志指示 get 使用网络更新命名包
+以及他们的依赖。 默认情况下，get 使用网络签出
+缺少包但不使用它来查找现有包的更新。
+
+The -v flag enables verbose progress and debug output.
+
+Get also accepts build flags to control the installation. See 'go help build'.
+Get 还接受构建标志来控制安装。 请参阅“帮助构建”。
+
+When checking out a new package, get creates the target directory
+GOPATH/src/<import-path>. If the GOPATH contains multiple entries,
+get uses the first one. For more details see: 'go help gopath'.
+
+When checking out or updating a package, get looks for a branch or tag
+that matches the locally installed version of Go. The most important
+rule is that if the local installation is running version "go1", get
+searches for a branch or tag named "go1". If no such version exists
+it retrieves the default branch of the package.
+签出或更新包时，get 查找分支或标签
+匹配本地安装的 Go 版本。 最重要的
+规则是，如果本地安装正在运行版本“go1”，则获取
+搜索名为“go1”的分支或标签。 如果不存在这样的版本
+它检索包的默认分支。
+
+When go get checks out or updates a Git repository,
+it also updates any git submodules referenced by the repository.
+
+Get never checks out or updates code stored in vendor directories.
+
+For more about specifying packages, see 'go help packages'.
+
+For more about how 'go get' finds source code to
+download, see 'go help importpath'.
+
+This text describes the behavior of get when using GOPATH
+to manage source code and dependencies.
+If instead the go command is running in module-aware mode,
+the details of get's flags and effects change, as does 'go help get'.
+See 'go help modules' and 'go help module-get'.
+
+See also: go build, go install, go clean.

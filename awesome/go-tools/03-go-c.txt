@@ -1,0 +1,36 @@
+$ go version
+go version go1.18.1 darwin/amd64
+
+
+$ go help c
+There are two different ways to call between Go and C/C++ code.
+
+The first is the cgo tool, which is part of the Go distribution. For
+information on how to use it see the cgo documentation (go doc cmd/cgo).
+
+The second is the SWIG program, which is a general tool for
+interfacing between languages. For information on SWIG see
+http://swig.org/. When running go build, any file with a .swig
+extension will be passed to SWIG. Any file with a .swigcxx extension
+will be passed to SWIG with the -c++ option.
+
+When either cgo or SWIG is used, go build will pass any .c, .m, .s, .S
+or .sx files to the C compiler, and any .cc, .cpp, .cxx files to the C++
+compiler. The CC or CXX environment variables may be set to determine
+the C or C++ compiler, respectively, to use.
+
+Go和C/C++代码之间有两种不同的调用方式。
+
+第一个是 cgo 工具，它是 Go 发行版的一部分。 为了
+有关如何使用它的信息，请参阅 cgo 文档 (go doc cmd/cgo)。
+
+第二个是 SWIG 程序，它是一个通用工具
+语言之间的接口。 有关 SWIG 的信息，请参阅
+http://swig.org/。 运行 go build 时，任何带有 .swig 的文件
+扩展名将传递给 SWIG。 任何具有 .swigcxx 扩展名的文件
+将使用 -c++ 选项传递给 SWIG。
+
+当使用 cgo 或 SWIG 时，go build 将传递任何 .c、.m、.s、.S
+或 .sx 文件到 C 编译器，任何 .cc、.cpp、.cxx 文件到 C++
+编译器。 可以设置 CC 或 CXX 环境变量以确定
+分别使用 C 或 C++ 编译器。

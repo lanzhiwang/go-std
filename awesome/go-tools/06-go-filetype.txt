@@ -1,0 +1,45 @@
+$ go version
+go version go1.18.1 darwin/amd64
+
+
+$ go help filetype
+The go command examines the contents of a restricted set of files
+in each directory. It identifies which files to examine based on
+the extension of the file name. These extensions are:
+go 命令检查一组受限文件的内容
+在每个目录中。 它确定要根据哪些文件进行检查
+文件名的扩展名。 这些扩展是：
+
+	.go
+		Go source files.
+	.c, .h
+		C source files.
+		If the package uses cgo or SWIG, these will be compiled with the
+		OS-native compiler (typically gcc); otherwise they will
+		trigger an error.
+	.cc, .cpp, .cxx, .hh, .hpp, .hxx
+		C++ source files. Only useful with cgo or SWIG, and always
+		compiled with the OS-native compiler.
+	.m
+		Objective-C source files. Only useful with cgo, and always
+		compiled with the OS-native compiler.
+	.s, .S, .sx
+		Assembler source files.
+		If the package uses cgo or SWIG, these will be assembled with the
+		OS-native assembler (typically gcc (sic)); otherwise they
+		will be assembled with the Go assembler.
+	.swig, .swigcxx
+		SWIG definition files.
+	.syso
+		System object files.
+
+Files of each of these types except .syso may contain build
+constraints, but the go command stops scanning for build constraints
+at the first item in the file that is not a blank line or //-style
+line comment. See the go/build package documentation for
+more details.
+除 .syso 之外的每种类型的文件都可能包含构建
+约束，但是 go 命令停止扫描构建约束
+在文件中不是空行或 // 样式的第一项
+行评论。 请参阅 go/build 包文档
+更多细节。
