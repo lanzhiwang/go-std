@@ -1,0 +1,41 @@
+$ go version
+go version go1.18.1 darwin/amd64
+
+
+$ go help modules
+Modules are how Go manages dependencies.
+模块是 Go 管理依赖项的方式。
+
+A module is a collection of packages that are released, versioned, and
+distributed together. Modules may be downloaded directly from version control
+repositories or from module proxy servers.
+一个模块是一个包的集合，这些包被发布、版本控制和
+分布在一起。 模块可以直接从版本控制下载
+存储库或来自模块代理服务器。
+
+For a series of tutorials on modules, see
+https://golang.org/doc/tutorial/create-module.
+有关模块的系列教程，请参见
+
+For a detailed reference on modules, see https://golang.org/ref/mod.
+有关模块的详细参考，请参阅 https://golang.org/ref/mod。
+
+By default, the go command may download modules from https://proxy.golang.org.
+It may authenticate modules using the checksum database at
+https://sum.golang.org. Both services are operated by the Go team at Google.
+The privacy policies for these services are available at
+https://proxy.golang.org/privacy and https://sum.golang.org/privacy,
+respectively.
+默认情况下，go 命令可以从 https://proxy.golang.org 下载模块。
+它可以使用校验和数据库验证模块
+https://sum.golang.org。 这两项服务均由 Google 的 Go 团队运营。
+这些服务的隐私政策可在
+https://proxy.golang.org/privacy 和 https://sum.golang.org/privacy，
+分别。
+
+The go command's download behavior may be configured using GOPROXY, GOSUMDB,
+GOPRIVATE, and other environment variables. See 'go help environment'
+and https://golang.org/ref/mod#private-module-privacy for more information.
+go 命令的下载行为可以使用 GOPROXY、GOSUMDB、
+GOPRIVATE 和其他环境变量。 请参阅“帮助环境”
+和 https://golang.org/ref/mod#private-module-privacy 了解更多信息。

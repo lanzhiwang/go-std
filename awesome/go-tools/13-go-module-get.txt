@@ -1,0 +1,91 @@
+$ go version
+go version go1.18.1 darwin/amd64
+
+
+$ go help module-get
+The 'go get' command changes behavior depending on whether the
+go command is running in module-aware mode or legacy GOPATH mode.
+This help text, accessible as 'go help module-get' even in legacy GOPATH mode,
+describes 'go get' as it operates in module-aware mode.
+“go get”命令根据是否
+go 命令正在模块感知模式或传统 GOPATH 模式下运行。
+这个帮助文本，即使在传统的 GOPATH 模式下也可以作为“go help module-get”访问，
+描述“go get”，因为它在模块感知模式下运行。
+
+Usage: go get [-t] [-u] [-v] [build flags] [packages]
+
+Get resolves its command-line arguments to packages at specific module versions,
+updates go.mod to require those versions, and downloads source code into the
+module cache.
+Get 将其命令行参数解析为特定模块版本的包，
+更新 go.mod 以需要这些版本，并将源代码下载到
+模块缓存。
+
+To add a dependency for a package or upgrade it to its latest version:
+
+	go get example.com/pkg
+
+To upgrade or downgrade a package to a specific version:
+
+	go get example.com/pkg@v1.2.3
+
+To remove a dependency on a module and downgrade modules that require it:
+
+	go get example.com/mod@none
+
+See https://golang.org/ref/mod#go-get for details.
+
+In earlier versions of Go, 'go get' was used to build and install packages.
+Now, 'go get' is dedicated to adjusting dependencies in go.mod. 'go install'
+may be used to build and install commands instead. When a version is specified,
+'go install' runs in module-aware mode and ignores the go.mod file in the
+current directory. For example:
+在早期版本的 Go 中，“go get”用于构建和安装包。
+现在，'go get' 专门用于调整 go.mod 中的依赖项。 '去安装'
+可用于构建和安装命令。 指定版本时，
+'go install' 在模块感知模式下运行并忽略 go.mod 文件
+当前目录。 例如：
+
+	go install example.com/pkg@v1.2.3
+	go install example.com/pkg@latest
+
+See 'go help install' or https://golang.org/ref/mod#go-install for details.
+
+'go get' accepts the following flags.
+
+The -t flag instructs get to consider modules needed to build tests of
+packages specified on the command line.
+-t 标志指示 get 考虑构建测试所需的模块
+在命令行上指定的包。
+
+The -u flag instructs get to update modules providing dependencies
+of packages named on the command line to use newer minor or patch
+releases when available.
+-u 标志指示获取更新提供依赖项的模块
+在命令行上命名的包的数量，以使用较新的次要版本或补丁
+可用时发布。
+
+The -u=patch flag (not -u patch) also instructs get to update dependencies,
+but changes the default to select patch releases.
+
+When the -t and -u flags are used together, get will update
+test dependencies as well.
+
+The -x flag prints commands as they are executed. This is useful for
+debugging version control commands when a module is downloaded directly
+from a repository.
+
+For more about modules, see https://golang.org/ref/mod.
+
+For more about specifying packages, see 'go help packages'.
+
+This text describes the behavior of get using modules to manage source
+code and dependencies. If instead the go command is running in GOPATH
+mode, the details of get's flags and effects change, as does 'go help get'.
+See 'go help gopath-get'.
+这段文字描述了get使用modules管理source的行为
+代码和依赖项。 相反，如果 go 命令在 GOPATH 中运行
+模式下，get 的标志和效果的细节发生变化，'go help get' 也是如此。
+请参阅“go help gopath-get”。
+
+See also: go build, go install, go clean, go mod.

@@ -7,11 +7,18 @@ An import path (see 'go help packages') denotes a package stored in the local
 file system. In general, an import path denotes either a standard package (such
 as "unicode/utf8") or a package found in one of the work spaces (For more
 details see: 'go help gopath').
+导入路径（参见'go help packages'）表示存储在本地的包
+文件系统。 通常，导入路径表示标准包（例如
+作为“unicode/utf8”）或在其中一个工作空间中找到的包（有关更多信息
+详情参见：'go help gopath'）。
 
 Relative import paths
+相对导入路径
 
 An import path beginning with ./ or ../ is called a relative path.
 The toolchain supports relative import paths as a shortcut in two ways.
+以 ./ 或 ../ 开头的导入路径称为相对路径。
+工具链以两种方式支持相对导入路径作为快捷方式。
 
 First, a relative path can be used as a shorthand on the command line.
 If you are working in the directory containing the code imported as
@@ -21,6 +28,14 @@ Similarly, in the reverse situation, "go test .." will test "unicode" from
 the "unicode/utf8" directory. Relative patterns are also allowed, like
 "go test ./..." to test all subdirectories. See 'go help packages' for details
 on the pattern syntax.
+首先，相对路径可以用作命令行上的简写。
+如果您在包含导入代码的目录中工作
+“unicode”并想运行“unicode/utf8”的测试，你可以输入
+“go test ./utf8” 而不是需要指定完整路径。
+同样，在相反的情况下，“go test ..”将从测试“unicode”
+“unicode/utf8”目录。 也允许使用相对模式，例如
+“go test ./...”测试所有子目录。 有关详细信息，请参阅“go help packages”
+关于模式语法。
 
 Second, if you are compiling a Go program not in a work space,
 you can use a relative path in an import statement in that program
@@ -31,14 +46,28 @@ installed with "go install" (there is no work space in which to install them),
 so they are rebuilt from scratch each time they are built.
 To avoid ambiguity, Go programs cannot use relative import paths
 within a work space.
+其次，如果您不在工作空间中编译 Go 程序，
+您可以在该程序的导入语句中使用相对路径
+参考附近的代码也不在工作空间中。
+这使得使用小型多包程序进行试验变得容易
+在通常的工作空间之外，但此类程序不能
+使用“go install”安装（没有安装它们的工作空间），
+因此每次构建它们时都会从头开始重建。
+为了避免歧义，Go 程序不能使用相对导入路径
+在工作空间内。
 
 Remote import paths
+远程导入路径
 
 Certain import paths also
 describe how to obtain the source code for the package using
 a revision control system.
+某些导入路径也
+描述如何使用获取包的源代码
+修订控制系统。
 
 A few common code hosting sites have special syntax:
+一些常见的代码托管站点具有特殊的语法：
 
 	Bitbucket (Git, Mercurial)
 
@@ -68,14 +97,22 @@ For code hosted on other servers, import paths may either be qualified
 with the version control type, or the go tool can dynamically fetch
 the import path over https/http and discover where the code resides
 from a <meta> tag in the HTML.
+对于托管在其他服务器上的代码，导入路径可能是合格的
+与版本控制类型，或者go工具可以动态获取
+通过 https/http 的导入路径并发现代码所在的位置
+来自 HTML 中的 <meta> 标记。
 
 To declare the code location, an import path of the form
+声明代码位置，表单的导入路径
 
 	repository.vcs/path
 
 specifies the given repository, with or without the .vcs suffix,
 using the named version control system, and then the path inside
 that repository. The supported version control systems are:
+指定给定的存储库，有或没有 .vcs 后缀，
+使用命名的版本控制系统，然后是里面的路径
+那个存储库。 支持的版本控制系统是：
 
 	Bazaar      .bzr
 	Fossil      .fossil

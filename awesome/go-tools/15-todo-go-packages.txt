@@ -1,0 +1,147 @@
+$ go version
+go version go1.18.1 darwin/amd64
+
+
+$ go help packages
+Many commands apply to a set of packages:
+
+	go action [packages]
+
+Usually, [packages] is a list of import paths.
+
+An import path that is a rooted path or that begins with
+a . or .. element is interpreted as a file system path and
+denotes the package in that directory.
+导入路径是根路径或以
+A 。 或 .. 元素被解释为文件系统路径和
+表示该目录中的包。
+
+Otherwise, the import path P denotes the package found in
+the directory DIR/src/P for some DIR listed in the GOPATH
+environment variable (For more details see: 'go help gopath').
+否则，导入路径 P 表示找到的包
+GOPATH 中列出的某些 DIR 的目录 DIR/src/P
+环境变量（有关详细信息，请参阅：'go help gopath'）。
+
+If no import paths are given, the action applies to the
+package in the current directory.
+如果没有给出导入路径，则该操作适用于
+当前目录下的包。
+
+There are four reserved names for paths that should not be used
+for packages to be built with the go tool:
+有四个不应使用的路径保留名称
+对于要使用 go 工具构建的包：
+
+- "main" denotes the top-level package in a stand-alone executable.
+“main”表示独立可执行文件中的顶级包。
+
+- "all" expands to all packages found in all the GOPATH
+trees. For example, 'go list all' lists all the packages on the local
+system. When using modules, "all" expands to all packages in
+the main module and their dependencies, including dependencies
+needed by tests of any of those.
+"all" 扩展到在所有 GOPATH 中找到的所有包
+树。 例如，'go list all' 列出本地的所有包
+系统。 使用模块时，“all”扩展为所有包
+主模块及其依赖项，包括依赖项
+任何这些测试都需要。
+
+- "std" is like all but expands to just the packages in the standard
+Go library.
+“std”就像所有的一样，只是扩展到标准中的包
+去图书馆。
+
+- "cmd" expands to the Go repository's commands and their
+internal libraries.
+“cmd”扩展到 Go 存储库的命令及其
+内部图书馆。
+
+Import paths beginning with "cmd/" only match source code in
+the Go repository.
+以“cmd/”开头的导入路径只匹配源代码
+Go 存储库。
+
+An import path is a pattern if it includes one or more "..." wildcards,
+each of which can match any string, including the empty string and
+strings containing slashes. Such a pattern expands to all package
+directories found in the GOPATH trees with names matching the
+patterns.
+如果导入路径包含一个或多个“...”通配符，则它是一种模式，
+每个都可以匹配任何字符串，包括空字符串和
+包含斜杠的字符串。 这种模式扩展到所有包
+在 GOPATH 树中找到的目录名称与
+模式。
+
+To make common patterns more convenient, there are two special cases.
+First, /... at the end of the pattern can match an empty string,
+so that net/... matches both net and packages in its subdirectories, like net/http.
+Second, any slash-separated pattern element containing a wildcard never
+participates in a match of the "vendor" element in the path of a vendored
+package, so that ./... does not match packages in subdirectories of
+./vendor or ./mycode/vendor, but ./vendor/... and ./mycode/vendor/... do.
+Note, however, that a directory named vendor that itself contains code
+is not a vendored package: cmd/vendor would be a command named vendor,
+and the pattern cmd/... matches it.
+See golang.org/s/go15vendor for more about vendoring.
+为了使通用模式更方便，有两种特殊情况。
+首先，/...在模式的末尾可以匹配一个空字符串，
+以便 net/... 匹配其子目录中的 net 和包，如 net/http。
+其次，任何包含通配符的斜杠分隔的模式元素永远不会
+参与 vendored 路径中“vendor”元素的匹配
+包，因此 ./... 不匹配子目录中的包
+./vendor 或 ./mycode/vendor，但是 ./vendor/... 和 ./mycode/vendor/... 可以。
+但是请注意，名为 vendor 的目录本身包含代码
+不是销售包：cmd/vendor 将是一个名为 vendor 的命令，
+并且模式 cmd/... 匹配它。
+有关供应商的更多信息，请参见 golang.org/s/go15vendor。
+
+An import path can also name a package to be downloaded from
+a remote repository. Run 'go help importpath' for details.
+导入路径也可以命名要从中下载的包
+远程存储库。 运行“go help importpath”获取详细信息。
+
+Every package in a program must have a unique import path.
+By convention, this is arranged by starting each path with a
+unique prefix that belongs to you. For example, paths used
+internally at Google all begin with 'google', and paths
+denoting remote repositories begin with the path to the code,
+such as 'github.com/user/repo'.
+程序中的每个包都必须具有唯一的导入路径。
+按照惯例，这是通过以每个路径开始来安排的
+属于你的唯一前缀。 例如，使用的路径
+在 Google 内部，所有路径都以“google”开头
+表示远程存储库以代码路径开头，
+例如“github.com/user/repo”。
+
+Packages in a program need not have unique package names,
+but there are two reserved package names with special meaning.
+The name main indicates a command, not a library.
+Commands are built into binaries and cannot be imported.
+The name documentation indicates documentation for
+a non-Go program in the directory. Files in package documentation
+are ignored by the go command.
+程序中的包不需要有唯一的包名，
+但是有两个保留的包名有特殊的含义。
+名称 main 表示一个命令，而不是一个库。
+命令内置于二进制文件中，无法导入。
+名称文档表示文档
+目录中的非 Go 程序。 包文档中的文件
+被 go 命令忽略。
+
+As a special case, if the package list is a list of .go files from a
+single directory, the command is applied to a single synthesized
+package made up of exactly those files, ignoring any build constraints
+in those files and ignoring any other files in the directory.
+作为一种特殊情况，如果包列表是来自
+单个目录，命令应用于单个合成
+完全由这些文件组成的包，忽略任何构建约束
+在这些文件中并忽略目录中的任何其他文件。
+
+Directory and file names that begin with "." or "_" are ignored
+by the go tool, as are directories named "testdata".
+以“.”开头的目录和文件名 或“_”被忽略
+通过 go 工具，名为“testdata”的目录也是如此。
+
+
+

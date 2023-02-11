@@ -1,0 +1,19 @@
+$ go version
+go version go1.18.1 darwin/amd64
+
+
+$ go help module-auth
+When the go command downloads a module zip file or go.mod file into the
+module cache, it computes a cryptographic hash and compares it with a known
+value to verify the file hasn't changed since it was first downloaded. Known
+hashes are stored in a file in the module root directory named go.sum. Hashes
+may also be downloaded from the checksum database depending on the values of
+GOSUMDB, GOPRIVATE, and GONOSUMDB.
+当 go 命令将模块 zip 文件或 go.mod 文件下载到
+模块缓存，它计算一个加密哈希并将其与已知的进行比较
+值来验证文件自第一次下载后没有改变。 已知的
+哈希存储在名为 go.sum 的模块根目录中的文件中。 哈希值
+也可以根据值从校验和数据库下载
+GOSUMDB、GOPRIVATE 和 GONOSUMDB。
+
+For details, see https://golang.org/ref/mod#authenticating.
