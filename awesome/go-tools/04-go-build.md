@@ -2,7 +2,7 @@
 $ go help build
 
 # 重点参数
-go build -o output -v -work -x [packages]
+go build -o output -v -work -x -a [packages]
 ```
 
 usage: go build [-o output] [build flags] [packages]
