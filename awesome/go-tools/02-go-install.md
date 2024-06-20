@@ -1,4 +1,7 @@
+```bash
 $ go help install
+```
+
 usage: go install [build flags] [packages]
 
 Install compiles and installs the packages named by the import paths.
@@ -57,4 +60,6 @@ For more about build flags, see 'go help build'.
 For more about specifying packages, see 'go help packages'.
 
 See also: go build, go get, go clean.
-$
+
+---------------
+
