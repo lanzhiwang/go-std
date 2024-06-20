@@ -140,6 +140,7 @@ and test commands:
 	-asmflags '[pattern=]arg list'
 		arguments to pass on each go tool asm invocation.
 		每次 go tool asm 调用时传递的参数。
+		参考文档 go doc cmd/asm
 
 	-buildmode mode
 		build mode to use. See 'go help buildmode' for more.
@@ -159,12 +160,16 @@ and test commands:
 	-compiler name
 		name of compiler to use, as in runtime.Compiler (gccgo or gc).
 		要使用的编译器的名称，如runtime.Compiler（gccgo 或 gc）。
+		参考文档 go doc cmd/compile
 
 	-gccgoflags '[pattern=]arg list'
 		arguments to pass on each gccgo compiler/linker invocation.
+		参考文档 go doc cmd/compile
+		参考文档 go doc cmd/link
 
 	-gcflags '[pattern=]arg list'
 		arguments to pass on each go tool compile invocation.
+		参考文档 go doc cmd/compile
 
 	-installsuffix suffix
 		a suffix to use in the name of the package installation directory,
@@ -179,6 +184,7 @@ and test commands:
 
 	-ldflags '[pattern=]arg list'
 		arguments to pass on each go tool link invocation.
+		参考文档 go doc cmd/link
 
 	-linkshared
 		build code that will be linked against shared libraries previously
