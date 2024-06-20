@@ -1,5 +1,8 @@
 ```bash
 $ go help get
+
+# 重点参数
+$ go get -x [packages]
 ```
 
 usage: go get [-t] [-u] [-v] [build flags] [packages]
