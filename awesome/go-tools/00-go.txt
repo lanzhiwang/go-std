@@ -50,3 +50,7 @@ Additional help topics:
 	vcs             controlling version control with GOVCS
 
 Use "go help <topic>" for more information about that topic.
+
+$ go version
+go version go1.22.3 darwin/amd64
+$
