@@ -44,6 +44,8 @@ vet
 /usr/local/go/pkg/tool/linux_amd64/buildid # Buildid displays or updates the build ID stored in a Go package or binary.
 /usr/local/go/pkg/tool/linux_amd64/pack # Pack 是传统 Unix ar 工具的简化版本。它仅实现了 Go 所需的操作。
 
+/usr/local/go/pkg/tool/linux_amd64/cgo
+
 $ ls -al /usr/local/go/pkg/tool/linux_amd64/
 total 86468
 drwxr-xr-x 2 root root     4096 May 30 19:26 .
