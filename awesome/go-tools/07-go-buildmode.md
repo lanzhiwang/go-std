@@ -1,11 +1,4 @@
-参考：
-1、https://chenjiehua.me/golang/golang-buildmode.html
-
-
-$ go version
-go version go1.18.1 darwin/amd64
-
-
+```bash
 $ go help buildmode
 The 'go build' and 'go install' commands take a -buildmode argument which
 indicates which kind of object file is to be built. Currently supported values
@@ -52,3 +45,6 @@ are:
 
 On AIX, when linking a C program that uses a Go archive built with
 -buildmode=c-archive, you must pass -Wl,-bnoobjreorder to the C compiler.
+$
+
+```
