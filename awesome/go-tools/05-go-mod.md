@@ -8,9 +8,9 @@ Note that support for modules is built into all the go commands,
 not just 'go mod'. For example, day-to-day adding, removing, upgrading,
 and downgrading of dependencies should be done using 'go get'.
 See 'go help modules' for an overview of module functionality.
-请注意，所有 go 命令都内置了对模块的支持，而不仅仅是“go mod”。
-例如，日常添加、删除、升级和降级依赖项应使用“go get”完成。
-有关模块功能的概述，请参阅“go help modules”。
+请注意, 所有 go 命令都内置了对模块的支持, 而不仅仅是"go mod".
+例如, 日常添加、删除、升级和降级依赖项应使用"go get"完成.
+有关模块功能的概述, 请参阅"go help modules".
 
 Usage:
 
@@ -38,14 +38,14 @@ usage: go mod init [module-path]
 Init initializes and writes a new go.mod file in the current directory, in
 effect creating a new module rooted at the current directory. The go.mod file
 must not already exist.
-Init 初始化并在当前目录中写入一个新的 go.mod 文件，实际上创建一个以当前目录为根的新模块。 go.mod 文件必须不存在。
+Init 初始化并在当前目录中写入一个新的 go.mod 文件, 实际上创建一个以当前目录为根的新模块.  go.mod 文件必须不存在.
 
 Init accepts one optional argument, the module path for the new module. If the
 module path argument is omitted, init will attempt to infer the module path
 using import comments in .go files, vendoring tool configuration files (like
 Gopkg.lock), and the current directory (if in GOPATH).
-Init 接受一个可选参数，即新模块的模块路径。
-如果省略模块路径参数，init 将尝试使用 .go 文件中的导入注释、供应商工具配置文件（如 Gopkg.lock）和当前目录（如果在 GOPATH 中）推断模块路径。
+Init 接受一个可选参数, 即新模块的模块路径.
+如果省略模块路径参数, init 将尝试使用 .go 文件中的导入注释、供应商工具配置文件(如 Gopkg.lock)和当前目录(如果在 GOPATH 中)推断模块路径.
 
 See https://golang.org/ref/mod#go-mod-init for more about 'go mod init'.
 

@@ -7,8 +7,8 @@ The go command examines the contents of a restricted set of files
 in each directory. It identifies which files to examine based on
 the extension of the file name. These extensions are:
 go 命令检查一组受限文件的内容
-在每个目录中。 它确定要根据哪些文件进行检查
-文件名的扩展名。 这些扩展是：
+在每个目录中.  它确定要根据哪些文件进行检查
+文件名的扩展名.  这些扩展是:
 
 	.go
 		Go source files.
@@ -39,7 +39,7 @@ at the first item in the file that is not a blank line or //-style
 line comment. See the go/build package documentation for
 more details.
 除 .syso 之外的每种类型的文件都可能包含构建
-约束，但是 go 命令停止扫描构建约束
+约束, 但是 go 命令停止扫描构建约束
 在文件中不是空行或 // 样式的第一项
-行评论。 请参阅 go/build 包文档
-更多细节。
+行评论.  请参阅 go/build 包文档
+更多细节.

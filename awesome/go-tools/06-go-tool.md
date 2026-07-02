@@ -5,11 +5,11 @@ usage: go tool [-n] command [args...]
 
 Tool runs the go tool command identified by the arguments.
 With no arguments it prints the list of known tools.
-工具运行由参数标识的 go tool 命令。如果没有参数，它会打印已知工具的列表。
+工具运行由参数标识的 go tool 命令. 如果没有参数, 它会打印已知工具的列表.
 
 The -n flag causes tool to print the command that would be
 executed but not execute it.
--n 标志使工具打印将要执行的命令，但不执行它。
+-n 标志使工具打印将要执行的命令, 但不执行它.
 
 For more about each tool command, see 'go doc cmd/<command>'.
 
@@ -42,7 +42,7 @@ vet
 /usr/local/go/pkg/tool/linux_amd64/asm # 汇编
 /usr/local/go/pkg/tool/linux_amd64/link # 链接
 /usr/local/go/pkg/tool/linux_amd64/buildid # Buildid displays or updates the build ID stored in a Go package or binary.
-/usr/local/go/pkg/tool/linux_amd64/pack # Pack 是传统 Unix ar 工具的简化版本。它仅实现了 Go 所需的操作。
+/usr/local/go/pkg/tool/linux_amd64/pack # Pack 是传统 Unix ar 工具的简化版本. 它仅实现了 Go 所需的操作.
 
 /usr/local/go/pkg/tool/linux_amd64/cgo
 

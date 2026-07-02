@@ -1,0 +1,106 @@
+$ pwd
+~/work/code/go_code/rabbitmq/rabbitmq-cluster-operator
+
+$ tree -a .
+.
+├── go.mod  module github.com/rabbitmq/cluster-operator
+├── go.sum
+├── main.go  package main
+├── api
+│   ├── grafanadashboard
+│   │   └── v1beta1  package v1beta1
+│   │       ├── doc.go
+│   │       ├── groupversion_info.go
+│   │       ├── types.go
+│   │       └── zz_generated.deepcopy.go
+│   └── v1beta1  package v1beta1
+│       ├── groupversion_info.go
+│       ├── rabbitmqcluster_status.go
+│       ├── rabbitmqcluster_status_test.go
+│       ├── rabbitmqcluster_types.go
+│       ├── rabbitmqcluster_types_test.go
+│       ├── suite_test.go
+│       └── zz_generated.deepcopy.go
+├── controllers  package controllers  package controllers_test
+│   ├── pod_executor.go
+│   ├── rabbitmqcluster_controller.go
+│   ├── rabbitmqcluster_controller_test.go
+│   ├── reconcile_cli.go
+│   ├── reconcile_cli_test.go
+│   ├── reconcile_finalizer.go
+│   ├── reconcile_finalizer_test.go
+│   ├── reconcile_persistence.go
+│   ├── reconcile_persistence_test.go
+│   ├── reconcile_rabbitmq_configurations.go
+│   ├── reconcile_rabbitmq_configurations_test.go
+│   ├── reconcile_scale_down.go
+│   ├── reconcile_scale_down_test.go
+│   ├── reconcile_status.go
+│   ├── reconcile_status_test.go
+│   ├── reconcile_tls.go
+│   ├── reconcile_tls_test.go
+│   ├── reconcile_upgrade.go
+│   ├── suite_test.go
+│   └── utils.go
+├── internal
+│   ├── metadata  package metadata  package metadata_test
+│   │   ├── annotation.go
+│   │   ├── annotation_test.go
+│   │   ├── label.go
+│   │   └── metadata_suite_test.go
+│   ├── middleware  package middleware
+│   │   ├── image_version.go
+│   │   └── v1  package v1
+│   │       ├── groupversion_info.go
+│   │       ├── imageversion_types.go
+│   │       └── zz_generated.deepcopy.go
+│   ├── resource  package resource  package resource_test
+│   │   ├── configmap.go
+│   │   ├── configmap_test.go
+│   │   ├── default_user_secret.go
+│   │   ├── default_user_secret_test.go
+│   │   ├── erlang_cookie.go
+│   │   ├── erlang_cookie_test.go
+│   │   ├── grafana_dashboard.go
+│   │   ├── headless_service.go
+│   │   ├── headless_service_test.go
+│   │   ├── image_version.go
+│   │   ├── rabbitmq_plugins.go
+│   │   ├── rabbitmq_plugins_test.go
+│   │   ├── rabbitmq_resource_builder.go
+│   │   ├── rabbitmq_resource_builder_test.go
+│   │   ├── resource_suite_test.go
+│   │   ├── role.go
+│   │   ├── role_binding.go
+│   │   ├── role_binding_test.go
+│   │   ├── role_test.go
+│   │   ├── service.go
+│   │   ├── service_account.go
+│   │   ├── service_account_test.go
+│   │   ├── service_monitor.go
+│   │   ├── service_test.go
+│   │   ├── statefulset.go
+│   │   └── statefulset_test.go
+│   └── status  package status  package status_test
+│       ├── all_replicas_ready.go
+│       ├── all_replicas_ready_test.go
+│       ├── cluster_available.go
+│       ├── cluster_available_test.go
+│       ├── no_warnings.go
+│       ├── no_warnings_test.go
+│       ├── reconcile_success.go
+│       ├── reconcile_success_test.go
+│       ├── status.go
+│       ├── status_suite_test.go
+│       ├── status_test.go
+│       └── zz_generated.deepcopy.go
+├── pkg
+│   └── cert  package cert
+│       └── cert.go
+├── system_tests  package system_tests
+│   ├── system_test.go
+│   ├── system_tests.go
+│   ├── system_tests_suite_test.go
+│   └── utils.go
+├── tools  package tools
+│   └── tools.go

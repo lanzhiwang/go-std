@@ -25,7 +25,7 @@ Table of Contents
   - Operators and punctuation  运算符和标点符号
   - Integer literals  整数文字
   - Floating-point literals  浮点文字
-  - Imaginary literals  虚构的文字
+  - Imaginary literals  虚数
   - Rune literals  符文文字
   - String literals  字符串文字
 
@@ -193,11 +193,19 @@ Productions are expressions constructed from terms and the following operators, 
 {}  repetition (0 to n times)
 ```
 
-Lowercase production names are used to identify lexical (terminal) tokens. Non-terminals are in CamelCase. Lexical tokens are enclosed in double quotes `""` or back quotes ````.
-小写的产生式名称用于标识词汇（终端）标记。非终结符采用驼峰命名法。词汇标记用双引号 `""` 或反引号 ` `` ` 括起来。
+Lowercase production names are used to identify lexical (terminal) tokens.
+Non-terminals are in CamelCase.
+Lexical tokens are enclosed in double quotes `""` or back quotes \`\`.
+小写的产生式名称用于标识词汇（终端）标记。
+非终结符采用驼峰命名法。
+词汇标记用双引号 `""` 或反引号 \`\` 括起来。
 
-The form `a … b` represents the set of characters from `a` through `b` as alternatives. The horizontal ellipsis `…` is also used elsewhere in the spec to informally denote various enumerations or code snippets that are not further specified. The character `…` (as opposed to the three characters `...`) is not a token of the Go language.
-`a … b` 形式表示从 `a` 到 `b` 的替代字符集。水平省略号 `…` 也在规范中的其他地方使用，以非正式地表示未进一步指定的各种枚举或代码片段。字符 `…` （与三个字符 `...` 相对）不是 Go 语言的标记。
+The form `a … b` represents the set of characters from `a` through `b` as alternatives.
+The horizontal ellipsis `…` is also used elsewhere in the spec to informally denote various enumerations or code snippets that are not further specified.
+The character `…` (as opposed to the three characters `...`) is not a token of the Go language.
+`a … b` 形式表示从 `a` 到 `b` 的替代字符集。
+水平省略号 `…` 也在规范中的其他地方使用，以非正式地表示未进一步指定的各种枚举或代码片段。
+字符 `…` （与三个字符 `...` 相对）不是 Go 语言的标记。
 
 A link of the form [[Go 1.xx](https://go.dev/ref/spec#Language_versions)] indicates that a described language feature (or some aspect of it) was changed or added with language version 1.xx and thus requires at minimum that language version to build. For details, see the [linked section](https://go.dev/ref/spec#Language_versions) in the [appendix](https://go.dev/ref/spec#Appendix).
 [Go 1.xx] 形式的链接表示所描述的语言功能（或其某些方面）已随语言版本 1.xx 更改或添加，因此至少需要该语言版本才能构建。有关详细信息，请参阅附录中的链接部分。
@@ -205,17 +213,26 @@ A link of the form [[Go 1.xx](https://go.dev/ref/spec#Language_versions)] indica
 ## Source code representation
 源代码表示
 
-Source code is Unicode text encoded in [UTF-8](https://en.wikipedia.org/wiki/UTF-8). The text is not canonicalized, so a single accented code point is distinct from the same character constructed from combining an accent and a letter; those are treated as two code points. For simplicity, this document will use the unqualified term *character* to refer to a Unicode code point in the source text.
-源代码是采用 UTF-8 编码的 Unicode 文本。文本未规范化，因此单个重音代码点不同于由重音和字母组合而成的同一字符；这些被视为两个代码点。为简单起见，本文档将使用非限定术语字符来引用源文本中的 Unicode 代码点。
+Source code is Unicode text encoded in [UTF-8](https://en.wikipedia.org/wiki/UTF-8).
+The text is not canonicalized, so a single accented **code point** is distinct from the same character constructed from combining an accent and a letter; those are treated as two code points.
+For simplicity, this document will use the unqualified term **character** to refer to a Unicode code point in the source text.
+源代码是采用 UTF-8 编码的 Unicode 文本。
+文本未规范化，因此单个重音代码点不同于由重音和字母组合而成的同一字符；这些被视为两个代码点。
+为简单起见，本文档将使用非限定术语字符来引用源文本中的 Unicode 代码点。
 
-Each code point is distinct; for instance, uppercase and lowercase letters are different characters.
+Each code point is distinct; for instance, **uppercase and lowercase letters are different characters**.
 每个代码点都是不同的；例如，大写字母和小写字母是不同的字符。
 
-Implementation restriction: For compatibility with other tools, a compiler may disallow the NUL character (U+0000) in the source text.
+Implementation restriction:
+For compatibility with other tools, a compiler may disallow the NUL character (U+0000) in the source text.
 实现限制：为了与其他工具兼容，编译器可能不允许在源文本中使用 NUL 字符 (U+0000)。
 
-Implementation restriction: For compatibility with other tools, a compiler may ignore a UTF-8-encoded byte order mark (U+FEFF) if it is the first Unicode code point in the source text. A byte order mark may be disallowed anywhere else in the source.
-实现限制：为了与其他工具兼容，如果 UTF-8 编码的字节顺序标记 (U+FEFF) 是源文本中的第一个 Unicode 代码点，则编译器可能会忽略它。源中的其他任何地方都可能不允许使用字节顺序标记。
+Implementation restriction:
+For compatibility with other tools, a compiler may ignore a UTF-8-encoded byte order mark (U+FEFF) if it is the first Unicode code point in the source text.
+A byte order mark may be disallowed anywhere else in the source.
+实现限制：
+为了与其他工具兼容，如果 UTF-8 编码的字节顺序标记 (U+FEFF) 是源文本中的第一个 Unicode 代码点，则编译器可能会忽略它。
+源中的其他任何地方都可能不允许使用字节顺序标记。
 
 ### Characters
 字符
@@ -225,13 +242,20 @@ The following terms are used to denote specific Unicode character categories:
 
 ```
 newline        = /* the Unicode code point U+000A */ .
+
 unicode_char   = /* an arbitrary Unicode code point except newline */ .
+                    除换行符之外的任意 Unicode 代码点
+
 unicode_letter = /* a Unicode code point categorized as "Letter" */ .
+
 unicode_digit  = /* a Unicode code point categorized as "Number, decimal digit" */ .
+                    Unicode 代码点，分类为“数字、十进制数字“
 ```
 
-In [The Unicode Standard 8.0](https://www.unicode.org/versions/Unicode8.0.0/), Section 4.5 "General Category" defines a set of character categories. Go treats all characters in any of the Letter categories Lu, Ll, Lt, Lm, or Lo as Unicode letters, and those in the Number category Nd as Unicode digits.
-在 Unicode 标准 8.0 中，第 4.5 节“常规类别”定义了一组字符类别。 Go 将任何字母类别 Lu、Ll、Lt、Lm 或 Lo 中的所有字符视为 Unicode 字母，将数字类别 Nd 中的所有字符视为 Unicode 数字。
+In [The Unicode Standard 8.0](https://www.unicode.org/versions/Unicode8.0.0/), Section 4.5 "General Category" defines a set of character categories.
+Go treats all characters in any of the Letter categories Lu, Ll, Lt, Lm, or Lo as Unicode letters, and those in the Number category Nd as Unicode digits.
+在 Unicode 标准 8.0 中，第 4.5 节“常规类别”定义了一组字符类别。
+Go 将任何字母类别 Lu、Ll、Lt、Lm 或 Lo 中的所有字符视为 Unicode 字母，将数字类别 Nd 中的所有字符视为 Unicode 数字。
 
 ### Letters and digits
 字母和数字
@@ -240,7 +264,7 @@ The underscore character `_` (U+005F) is considered a lowercase letter.
 下划线字符 `_` (U+005F) 被视为小写字母。
 
 ```
-letter        = [unicode_letter](https://go.dev/ref/spec#unicode_letter) | "_" .
+letter        = unicode_letter | "_" .
 decimal_digit = "0" … "9" .
 binary_digit  = "0" | "1" .
 octal_digit   = "0" … "7" .
@@ -262,33 +286,47 @@ Comments serve as program documentation. There are two forms:
 2. *General comments* start with the character sequence `/*` and stop with the first subsequent character sequence `*/`.
    一般注释以字符序列 `/*` 开始，以第一个后续字符序列 `*/` 结束。
 
-A comment cannot start inside a [rune](https://go.dev/ref/spec#Rune_literals) or [string literal](https://go.dev/ref/spec#String_literals), or inside a comment. A general comment containing no newlines acts like a space. Any other comment acts like a newline.
-注释不能在符文或字符串文字内或注释内开始。不包含换行符的一般注释就像一个空格。任何其他注释都像换行符一样。
+A comment cannot start inside a `rune` or `string literal`, or inside a comment.
+A general comment containing no newlines acts like a space.
+Any other comment acts like a newline.
+注释不能在符文或字符串文字内或注释内开始。不
+包含换行符的一般注释就像一个空格。
+任何其他注释都像换行符一样。
 
 ### Tokens
 
-Tokens form the vocabulary of the Go language. There are four classes: *identifiers*, *keywords*, *operators and punctuation*, and *literals*. *White space*, formed from spaces (U+0020), horizontal tabs (U+0009), carriage returns (U+000D), and newlines (U+000A), is ignored except as it separates tokens that would otherwise combine into a single token. Also, a newline or end of file may trigger the insertion of a [semicolon](https://go.dev/ref/spec#Semicolons). While breaking the input into tokens, the next token is the longest sequence of characters that form a valid token.
-令牌构成了 Go 语言的词汇表。有四类：标识符、关键字、运算符和标点符号以及文字。由空格 (U+0020)、水平制表符 (U+0009)、回车符 (U+000D) 和换行符 (U+000A) 组成的空白将被忽略，除非它分隔了否则会组合成单个的标记。令牌。此外，换行符或文件结尾可能会触发分号的插入。将输入分解为标记时，下一个标记是形成有效标记的最长字符序列。
+Tokens form the vocabulary of the Go language.
+There are four classes: **identifiers**, **keywords**, **operators and punctuation**, and **literals**. 
+**White space**, formed from spaces (U+0020), horizontal tabs (U+0009), carriage returns (U+000D), and newlines (U+000A), is ignored except as it separates tokens that would otherwise combine into a single token.
+Also, a newline or end of file may trigger the insertion of a semicolon.
+While breaking the input into tokens, the next token is the longest sequence of characters that form a valid token.
+令牌构成了 Go 语言的词汇表。
+有四类：标识符、关键字、运算符和标点符号以及文字。
+由空格 (U+0020)、水平制表符 (U+0009)、回车符 (U+000D) 和换行符 (U+000A) 组成的空白将被忽略，除非它分隔了否则会组合成单个的标记令牌。
+此外，换行符或文件结尾可能会触发分号的插入。
+将输入分解为标记时，下一个标记是形成有效标记的最长字符序列。
 
 ### Semicolons
 分号
 
-The formal syntax uses semicolons `";"` as terminators in a number of productions. Go programs may omit most of these semicolons using the following two rules:
-正式语法在许多产生式中使用分号 `";"` 作为终止符。 Go 程序可以使用以下两个规则省略大部分分号：
+The formal syntax uses semicolons `";"` as terminators in a number of productions.
+Go programs may omit most of these semicolons using the following two rules:
+正式语法在许多产生式中使用分号 `";"` 作为终止符。
+Go 程序可以使用以下两个规则省略大部分分号：
 
 1. When the input is broken into tokens, a semicolon is automatically inserted into the token stream immediately after a line's final token if that token is
    当输入被分解为标记时，如果该标记是，则分号会立即自动插入到标记流中，位于该行的最终标记之后
 
-   - an [identifier](https://go.dev/ref/spec#Identifiers)
+   - an identifier
      一个标识符
 
-   - an [integer](https://go.dev/ref/spec#Integer_literals), [floating-point](https://go.dev/ref/spec#Floating-point_literals), [imaginary](https://go.dev/ref/spec#Imaginary_literals), [rune](https://go.dev/ref/spec#Rune_literals), or [string](https://go.dev/ref/spec#String_literals) literal
+   - an integer, floating-point, imaginary, rune, or string literal
      整数、浮点、虚数、符文或字符串文字
 
-   - one of the [keywords](https://go.dev/ref/spec#Keywords) `break`, `continue`, `fallthrough`, or `return`
+   - one of the keywords `break`, `continue`, `fallthrough`, or `return`
      关键字 `break` 、 `continue` 、 `fallthrough` 或 `return` 之一
 
-   - one of the [operators and punctuation](https://go.dev/ref/spec#Operators_and_punctuation) `++`, `--`, `)`, `]`, or `}`
+   - one of the operators and punctuation `++`, `--`, `)`, `]`, or `}`
      运算符和标点符号之一 `++` 、 `--` 、 `)` 、 `]` 或 `}`
 
 2. To allow complex statements to occupy a single line, a semicolon may be omitted before a closing `")"` or `"}"`.
@@ -297,11 +335,18 @@ The formal syntax uses semicolons `";"` as terminators in a number of producti
 To reflect idiomatic use, code examples in this document elide semicolons using these rules.
 为了反映惯用用法，本文档中的代码示例使用这些规则省略了分号。
 
+> note:
+> go 语言是需要分号的，只不过可以被省略
+
 ### Identifiers
 标识
 
-Identifiers name program entities such as variables and types. An identifier is a sequence of one or more letters and digits. The first character in an identifier must be a letter.
-标识符命名程序实体，例如变量和类型。标识符是一个或多个字母和数字的序列。标识符中的第一个字符必须是字母。
+Identifiers name program entities such as variables and types.
+An identifier is a sequence of one or more letters and digits.
+The first character in an identifier must be a letter.
+标识符命名程序实体，例如变量和类型。
+标识符是一个或多个字母和数字的序列。
+标识符中的第一个字符必须是字母。
 
 ```
 identifier = letter { letter | unicode_digit } .
@@ -314,7 +359,7 @@ ThisVariableIsExported
 αβ
 ```
 
-Some identifiers are [predeclared](https://go.dev/ref/spec#Predeclared_identifiers).
+Some identifiers are predeclared.
 一些标识符是预先声明的。
 
 ### Keywords
@@ -334,7 +379,7 @@ continue     for          import       return       var
 ### Operators and punctuation
 运算符和标点符号
 
-The following character sequences represent [operators](https://go.dev/ref/spec#Operators) (including [assignment operators](https://go.dev/ref/spec#Assignment_statements)) and punctuation [[Go 1.18](https://go.dev/ref/spec#Go_1.18)]:
+The following character sequences represent operators (including assignment operators) and punctuation [[Go 1.18](https://go.dev/ref/spec#Go_1.18)]:
 以下字符序列表示运算符（包括赋值运算符）和标点符号[Go 1.18]：
 
 ```
@@ -349,8 +394,13 @@ The following character sequences represent [operators](https://go.dev/ref/spec
 ### Integer literals
 整数文字
 
-An integer literal is a sequence of digits representing an [integer constant](https://go.dev/ref/spec#Constants). An optional prefix sets a non-decimal base: `0b` or `0B` for binary, `0`, `0o`, or `0O` for octal, and `0x` or `0X` for hexadecimal [[Go 1.13](https://go.dev/ref/spec#Go_1.13)]. A single `0` is considered a decimal zero. In hexadecimal literals, letters `a` through `f` and `A` through `F` represent values 10 through 15.
-整数文字是表示整数常量的数字序列。可选前缀设置非十进制基数： `0b` 或 `0B` （二进制）、 `0` 、 `0o` 或 `0O` 或 `0X` 表示十六进制 [Go 1.13]。单个 `0` 被视为十进制零。在十六进制文字中，字母 `a` 到 `f` 和 `A` 到 `F` 表示值 10 到 15。
+An integer literal is a sequence of digits representing an integer constant.
+An optional prefix sets a non-decimal base: 
+`0b` or `0B` for binary, 
+`0`, `0o`, or `0O` for octal,
+and `0x` or `0X` for hexadecimal [[Go 1.13](https://go.dev/ref/spec#Go_1.13)].
+A single `0` is considered a decimal zero.
+In hexadecimal literals, letters `a` through `f` and `A` through `F` represent values 10 through 15.
 
 For readability, an underscore character `_` may appear after a base prefix or between successive digits; such underscores do not change the literal's value.
 为了便于阅读，下划线字符 `_` 可能出现在基本前缀之后或连续数字之间；这样的下划线不会改变文字的值。
@@ -389,14 +439,28 @@ _42         // an identifier, not an integer literal
 ### Floating-point literals
 浮点文字
 
-A floating-point literal is a decimal or hexadecimal representation of a [floating-point constant](https://go.dev/ref/spec#Constants).
+A floating-point literal is a decimal or hexadecimal representation of a floating-point constant.
 浮点文字是浮点常量的十进制或十六进制表示形式。
 
-A decimal floating-point literal consists of an integer part (decimal digits), a decimal point, a fractional part (decimal digits), and an exponent part (`e` or `E` followed by an optional sign and decimal digits). One of the integer part or the fractional part may be elided; one of the decimal point or the exponent part may be elided. An exponent value exp scales the mantissa (integer and fractional part) by 10exp.
-十进制浮点文字由整数部分（小数位）、小数点、小数部分（小数位）和指数部分（ `e` 或 `E` 后跟组成可选的符号和小数位）。整数部分或小数部分之一可以省略；小数点或指数部分之一可以被省略。指数值 exp 将尾数（整数和小数部分）缩放 10 exp 。
+A decimal floating-point literal consists of an **integer part** (decimal digits), a **decimal point**, a **fractional part** (decimal digits), and an **exponent part** (`e` or `E` followed by an optional sign and decimal digits).
+One of the integer part or the fractional part may be elided;
+one of the decimal point or the exponent part may be elided.
+An exponent value exp scales the mantissa (integer and fractional part) by 10exp.
+十进制浮点文字由整数部分（小数位）、小数点、小数部分（小数位）和指数部分（ `e` 或 `E` 后跟组成可选的符号和小数位）。
+整数部分或小数部分之一可以省略；
+小数点或指数部分之一可以被省略。
+指数值 exp 将尾数（整数和小数部分）缩放 10 exp 。
 
-A hexadecimal floating-point literal consists of a `0x` or `0X` prefix, an integer part (hexadecimal digits), a radix point, a fractional part (hexadecimal digits), and an exponent part (`p` or `P` followed by an optional sign and decimal digits). One of the integer part or the fractional part may be elided; the radix point may be elided as well, but the exponent part is required. (This syntax matches the one given in IEEE 754-2008 §5.12.3.) An exponent value exp scales the mantissa (integer and fractional part) by 2exp [[Go 1.13](https://go.dev/ref/spec#Go_1.13)].
-十六进制浮点文字由 `0x` 或 `0X` 前缀、整数部分（十六进制数字）、小数点、小数部分（十六进制数字）和指数部分组成（ `p` 或 `P` 后跟可选的符号和小数位）。整数部分或小数部分之一可以省略；小数点也可以省略，但指数部分是必需的。 （此语法与 IEEE 754-2008 §5.12.3 中给出的语法匹配。）指数值 exp 将尾数（整数和小数部分）缩放 2 exp [Go 1.13]。
+A hexadecimal floating-point literal consists of a `0x` or `0X` prefix, an **integer part** (hexadecimal digits), a **radix point**, a **fractional part** (hexadecimal digits), and an **exponent part** (`p` or `P` followed by an optional sign and decimal digits).
+One of the integer part or the fractional part may be elided;
+the radix point may be elided as well, but the exponent part is required.
+(This syntax matches the one given in IEEE 754-2008 §5.12.3.)
+An exponent value exp scales the mantissa (integer and fractional part) by 2exp [[Go 1.13](https://go.dev/ref/spec#Go_1.13)].
+十六进制浮点文字由 `0x` 或 `0X` 前缀、整数部分（十六进制数字）、小数点、小数部分（十六进制数字）和指数部分组成（ `p` 或 `P` 后跟可选的符号和小数位）。
+整数部分或小数部分之一可以省略；
+小数点也可以省略，但指数部分是必需的。
+（此语法与 IEEE 754-2008 §5.12.3 中给出的语法匹配。）
+指数值 exp 将尾数（整数和小数部分）缩放 2 exp [Go 1.13]。
 
 For readability, an underscore character `_` may appear after a base prefix or between successive digits; such underscores do not change the literal value.
 为了便于阅读，下划线字符 `_` 可能出现在基本前缀之后或连续数字之间；这样的下划线不会改变文字值。
@@ -445,10 +509,14 @@ hex_exponent      = ( "p" | "P" ) [ "+" | "-" ] decimal_digits .
 ```
 
 ### Imaginary literals
-虚构的文字
+虚数
 
-An imaginary literal represents the imaginary part of a [complex constant](https://go.dev/ref/spec#Constants). It consists of an [integer](https://go.dev/ref/spec#Integer_literals) or [floating-point](https://go.dev/ref/spec#Floating-point_literals) literal followed by the lowercase letter `i`. The value of an imaginary literal is the value of the respective integer or floating-point literal multiplied by the imaginary unit *i* [[Go 1.13](https://go.dev/ref/spec#Go_1.13)]
-虚数文字表示复数常量的虚部。它由一个整数或浮点文字后跟小写字母 `i` 组成。虚数文字的值是相应整数或浮点文字乘以虚数单位的值[Go 1.13]
+An imaginary literal represents the imaginary part of a complex constant.
+It consists of an integer or floating-point literal followed by the lowercase letter `i`.
+The value of an imaginary literal is the value of the respective integer or floating-point literal multiplied by the imaginary unit *i* [[Go 1.13](https://go.dev/ref/spec#Go_1.13)]
+虚数文字表示复数常量的虚部。
+它由一个整数或浮点文字后跟小写字母 `i` 组成。
+虚数文字的值是相应整数或浮点文字乘以虚数单位的值[Go 1.13]
 
 ```
 imaginary_lit = (decimal_digits | int_lit | float_lit) "i" .
@@ -475,17 +543,48 @@ For backward compatibility, an imaginary literal's integer part consisting entir
 ### Rune literals
 符文文字
 
-A rune literal represents a [rune constant](https://go.dev/ref/spec#Constants), an integer value identifying a Unicode code point. **A rune literal is expressed as one or more characters enclosed in single quotes**, as in `'x'` or `'\n'`. Within the quotes, any character may appear except newline and unescaped single quote. A single quoted character represents the Unicode value of the character itself, while multi-character sequences beginning with a backslash encode values in various formats.  
-rune 字面量表示 rune 常量，即标识 Unicode 代码点的整数值。符文文字表示为用单引号括起来的一个或多个字符，如 `'x'` 或 `'\n'` 。引号内可以出现除换行符和未转义单引号之外的任何字符。单引号字符表示字符本身的 Unicode 值，而以反斜杠开头的多字符序列则以各种格式编码值。
+A rune literal represents a **rune constant**, an integer value identifying a **Unicode code point**.
+**A rune literal is expressed as one or more characters enclosed in single quotes**, as in `'x'` or `'\n'`.
+Within the quotes, any character may appear except newline and unescaped single quote.
+A single quoted character represents the Unicode value of the character itself, while multi-character sequences beginning with a backslash encode values in various formats.
+rune 字面量表示 rune 常量，即标识 Unicode 代码点的整数值。
+符文文字表示为用单引号括起来的一个或多个字符，如 `'x'` 或 `'\n'`。
+引号内可以出现除换行符和未转义单引号之外的任何字符。
+单引号字符表示字符本身的 Unicode 值，而以反斜杠开头的多字符序列则以各种格式编码值。
 
-The simplest form represents the single character within the quotes; since Go source text is Unicode characters encoded in UTF-8, multiple UTF-8-encoded bytes may represent a single integer value. For instance, the literal `'a'` holds a single byte representing a literal `a`, Unicode U+0061, value `0x61`, while `'ä'` holds two bytes (`0xc3` `0xa4`) representing a literal `a`-dieresis, U+00E4, value `0xe4`.
-最简单的形式表示引号内的单个字符；由于 Go 源文本是以 UTF-8 编码的 Unicode 字符，因此多个 UTF-8 编码的字节可以表示单个整数值。例如，文字 `'a'` 保存表示文字 `a` 的单个字节，Unicode U+0061，值 `0x61` ，而 `'ä'` 保存两个字节 ( `0xc3` `0xa4` ) 表示文字 `a` -dieresis, U+00E4, 值 `0xe4` 。
+The simplest form represents the single character within the quotes;
+since Go source text is Unicode characters encoded in UTF-8, multiple UTF-8-encoded bytes may represent a single integer value.
+For instance,
+the literal `'a'` holds a single byte representing a literal `a`, Unicode U+0061, value `0x61`,
+while `'ä'` holds two bytes (`0xc3` `0xa4`) representing a literal `a`-dieresis, U+00E4, value `0xe4`.
+最简单的形式表示引号内的单个字符；
+由于 Go 源文本是以 UTF-8 编码的 Unicode 字符，因此多个 UTF-8 编码的字节可以表示单个整数值。
+例如，文字 `'a'` 保存表示文字 `a` 的单个字节，Unicode U+0061，值 `0x61` ，
+而 `'ä'` 保存两个字节 ( `0xc3` `0xa4` ) 表示文字 `a` -dieresis, U+00E4, 值 `0xe4` 。
 
-Several backslash escapes allow arbitrary values to be encoded as ASCII text. There are four ways to represent the integer value as a numeric constant: `\x` followed by exactly two hexadecimal digits; `\u` followed by exactly four hexadecimal digits; `\U` followed by exactly eight hexadecimal digits, and a plain backslash `\` followed by exactly three octal digits. In each case the value of the literal is the value represented by the digits in the corresponding base.
-多个反斜杠转义允许将任意值编码为 ASCII 文本。有四种方法可以将整数值表示为数值常量： `\x` 后跟正好两个十六进制数字； `\u` 后跟正好四个十六进制数字； `\U` 后跟正好八个十六进制数字，以及一个简单的反斜杠 `\` 后跟正好三个八进制数字。在每种情况下，文字的值都是由相应基数中的数字表示的值。
+Several backslash escapes allow arbitrary values to be encoded as ASCII text.
+There are four ways to represent the integer value as a numeric constant: 
+`\x` followed by exactly two hexadecimal digits;
+`\u` followed by exactly four hexadecimal digits;
+`\U` followed by exactly eight hexadecimal digits,
+and a plain backslash `\` followed by exactly three octal digits.
+In each case the value of the literal is the value represented by the digits in the corresponding base.
+多个反斜杠转义允许将任意值编码为 ASCII 文本。
+有四种方法可以将整数值表示为数值常量： 
+`\x` 后跟正好两个十六进制数字； 
+`\u` 后跟正好四个十六进制数字； 
+`\U` 后跟正好八个十六进制数字，
+以及一个简单的反斜杠 `\` 后跟正好三个八进制数字。
+在每种情况下，文字的值都是由相应基数中的数字表示的值。
 
-Although these representations all result in an integer, they have different valid ranges. Octal escapes must represent a value between 0 and 255 inclusive. Hexadecimal escapes satisfy this condition by construction. The escapes `\u` and `\U` represent Unicode code points so within them some values are illegal, in particular those above `0x10FFFF` and surrogate halves.
-尽管这些表示都产生一个整数，但它们具有不同的有效范围。八进制转义符必须表示 0 到 255 之间的值（含 0 和 255）。十六进制转义符通过构造满足这个条件。转义符 `\u` 和 `\U` 表示 Unicode 代码点，因此其中的某些值是非法的，特别是 `0x10FFFF` 和代理项之上的值。
+Although these representations all result in an integer, they have different valid ranges.
+Octal escapes must represent a value between 0 and 255 inclusive.
+Hexadecimal escapes satisfy this condition by construction.
+The escapes `\u` and `\U` represent Unicode code points so within them some values are illegal, in particular those above `0x10FFFF` and surrogate halves.
+尽管这些表示都产生一个整数，但它们具有不同的有效范围。
+八进制转义符必须表示 0 到 255 之间的值（含 0 和 255）。
+十六进制转义符通过构造满足这个条件。
+转义符 `\u` 和 `\U` 表示 Unicode 代码点，因此其中的某些值是非法的，特别是 `0x10FFFF` 和代理项之上的值。
 
 After a backslash, certain single-character escapes represent special values:
 在反斜杠之后，某些单字符转义符代表特殊值：
@@ -543,14 +642,35 @@ escaped_char     = `\` ( "a" | "b" | "f" | "n" | "r" | "t" | "v" | `\` | "'" | `
 ### String literals
 字符串文字
 
-A string literal represents a [string constant](https://go.dev/ref/spec#Constants) obtained from concatenating a sequence of characters. There are two forms: raw string literals and interpreted string literals.
-字符串文字表示通过连接字符序列获得的字符串常量。有两种形式：原始字符串文字和解释字符串文字。
+A string literal represents a string constant obtained from concatenating a sequence of characters.
+There are two forms: **raw string literals** and **interpreted string literals**.
+字符串文字表示通过连接字符序列获得的字符串常量。
+有两种形式：原始字符串文字和解释字符串文字。
 
-Raw string literals are character sequences between back quotes, as in `` `foo` ``. Within the quotes, any character may appear except back quote. The value of a raw string literal is the string composed of the uninterpreted (implicitly UTF-8-encoded) characters between the quotes; in particular, backslashes have no special meaning and the string may contain newlines. Carriage return characters ('\r') inside raw string literals are discarded from the raw string value.
-原始字符串文字是反引号之间的字符序列，如 `foo` 中。引号内可以出现除反引号之外的任何字符。原始字符串文字的值是由引号之间的未解释（隐式 UTF-8 编码）字符组成的字符串；特别是，反斜杠没有特殊含义，并且字符串可能包含换行符。原始字符串文字内的回车符 ('\r') 将从原始字符串值中丢弃。
+Raw string literals are character sequences between back quotes, as in `` `foo` ``.
+Within the quotes, any character may appear except back quote.
+The value of a raw string literal is the string composed of the uninterpreted (implicitly UTF-8-encoded) characters between the quotes;
+in particular, backslashes have no special meaning and the string may contain newlines.
+Carriage return characters ('\r') inside raw string literals are discarded from the raw string value.
+原始字符串文字是反引号之间的字符序列，如 `foo` 中。
+引号内可以出现除反引号之外的任何字符。
+原始字符串文字的值是由引号之间的未解释（隐式 UTF-8 编码）字符组成的字符串；
+特别是，反斜杠没有特殊含义，并且字符串可能包含换行符。
+原始字符串文字内的回车符 ('\r') 将从原始字符串值中丢弃。
 
-**Interpreted string literals are character sequences between double quotes**, as in `"bar"`. Within the quotes, any character may appear except newline and unescaped double quote. The text between the quotes forms the value of the literal, with backslash escapes interpreted as they are in [rune literals](https://go.dev/ref/spec#Rune_literals) (except that `\'` is illegal and `\"` is legal), with the same restrictions. The three-digit octal (`\`*nnn*) and two-digit hexadecimal (`\x`*nn*) escapes represent individual *bytes* of the resulting string; all other escapes represent the (possibly multi-byte) UTF-8 encoding of individual *characters*. Thus inside a string literal `\377` and `\xFF` represent a single byte of value `0xFF`=255, while `ÿ`, `\u00FF`, `\U000000FF` and `\xc3\xbf` represent the two bytes `0xc3` `0xbf` of the UTF-8 encoding of character U+00FF.
-解释的字符串文字是双引号之间的字符序列，如 `"bar"` 中。引号内可以出现除换行符和未转义双引号之外的任何字符。引号之间的文本形成文字的值，反斜杠转义被解释为符文文字中的内容（除了 `\'` 是非法的， `\"` 是合法的），具有相同的限制。三位数八进制 ( `\` nnn) 和两位十六进制 ( `\x` nn) 转义符表示结果字符串的各个字节；所有其他转义符表示单个字符的（可能是多字节）UTF-8 编码。因此，在字符串文字中 `\377` 和 `\xFF` 表示值 `0xFF` =255 的单个字节，而 `ÿ` 、 `\u00FF` 和 `\xc3\xbf` 表示字符 U+00FF 的 UTF-8 编码的两个字节 `0xc3` `0xbf` 。
+**Interpreted string literals are character sequences between double quotes**, as in `"bar"`.
+Within the quotes, any character may appear except newline and unescaped double quote.
+The text between the quotes forms the value of the literal, with backslash escapes interpreted as they are in rune literals (except that `\'` is illegal and `\"` is legal), with the same restrictions.
+The three-digit octal (`\`*nnn*) and two-digit hexadecimal (`\x`*nn*) escapes represent individual *bytes* of the resulting string; all other escapes represent the (possibly multi-byte) UTF-8 encoding of individual *characters*.
+Thus inside a string literal `\377` and `\xFF` represent a single byte of value `0xFF`=255,
+while `ÿ`, `\u00FF`, `\U000000FF` and `\xc3\xbf` represent the two bytes `0xc3` `0xbf` of the UTF-8 encoding of character U+00FF.
+解释的字符串文字是双引号之间的字符序列，如 `"bar"` 中。
+引号内可以出现除换行符和未转义双引号之外的任何字符。
+引号之间的文本形成文字的值，反斜杠转义被解释为符文文字中的内容（除了 `\'` 是非法的， `\"` 是合法的），具有相同的限制。
+三位数八进制 ( `\` nnn) 和两位十六进制 ( `\x` nn) 转义符表示结果字符串的各个字节；
+所有其他转义符表示单个字符的（可能是多字节）UTF-8 编码。
+因此，在字符串文字中 `\377` 和 `\xFF` 表示值 `0xFF` =255 的单个字节，而
+ `ÿ` 、 `\u00FF` 和 `\xc3\xbf` 表示字符 U+00FF 的 UTF-8 编码的两个字节 `0xc3` `0xbf` 。
 
 ```
 string_lit             = raw_string_lit | interpreted_string_lit .
@@ -589,125 +709,200 @@ If the source code represents a character as two code points, such as a combinin
 ## Constants
 常数
 
-There are *boolean constants*, *rune constants*, *integer constants*, *floating-point constants*, *complex constants*, and *string constants*. Rune, integer, floating-point, and complex constants are collectively called *numeric constants*.
-有布尔常量、符文常量、整型常量、浮点常量、复数常量和字符串常量。符文常数、整数常数、浮点常数和复数常数统称为数值常数。
+There are 
+**boolean constants**, 
+**rune constants**, 
+**integer constants**, 
+**floating-point constants**, 
+**complex constants**,
+and **string constants**.
+Rune, integer, floating-point, and complex constants are collectively called **numeric constants**.
+有布尔常量、符文常量、整型常量、浮点常量、复数常量和字符串常量。
+符文常数、整数常数、浮点常数和复数常数统称为数值常数。
 
-A constant value is represented by a [rune](https://go.dev/ref/spec#Rune_literals), [integer](https://go.dev/ref/spec#Integer_literals), [floating-point](https://go.dev/ref/spec#Floating-point_literals), [imaginary](https://go.dev/ref/spec#Imaginary_literals), or [string](https://go.dev/ref/spec#String_literals) literal, an identifier denoting a constant, a [constant expression](https://go.dev/ref/spec#Constant_expressions), a [conversion](https://go.dev/ref/spec#Conversions) with a result that is a constant, or the result value of some built-in functions such as `min` or `max` applied to constant arguments, `unsafe.Sizeof` applied to [certain values](https://go.dev/ref/spec#Package_unsafe), `cap` or `len` applied to [some expressions](https://go.dev/ref/spec#Length_and_capacity), `real` and `imag` applied to a complex constant and `complex` applied to numeric constants. The boolean truth values are represented by the predeclared constants `true` and `false`. The predeclared identifier [iota](https://go.dev/ref/spec#Iota) denotes an integer constant.  
+A constant value is represented by a
+rune,
+integer,
+floating-point,
+imaginary,
+or string literal,
+an identifier denoting a constant,
+a constant expression,
+a conversion with a result that is a constant,
+or the result value of some built-in functions such as
+    `min` or `max` applied to constant arguments,
+    `unsafe.Sizeof` applied to certain values,
+    `cap` or `len` applied to some expressions,
+    `real` and `imag` applied to a complex constant and `complex` applied to numeric constants.
+The boolean truth values are represented by the predeclared constants `true` and `false`.
+The predeclared identifier `iota` denotes an integer constant.
 常量值由符文、整数、浮点、虚数或字符串文字、表示常量的标识符、常量表达式、结果为常量的转换或某些内置函数的结果值表示。函数，例如应用于常量参数的 `min` 或 `max` 、应用于某些值的 `unsafe.Sizeof` 、 `cap` 或 `len` 应用于某些表达式， `real` 和 `imag` 应用于复杂常量， `complex` 应用于数值常量。布尔真值由预先声明的常量 `true` 和 `false` 表示。预先声明的标识符iota表示整型常量。
 
-In general, complex constants are a form of [constant expression](https://go.dev/ref/spec#Constant_expressions) and are discussed in that section.  
+In general, complex constants are a form of constant expression and are discussed in that section.
 一般来说，复数常量是常量表达式的一种形式，将在该部分中讨论。
 
-Numeric constants represent exact values of arbitrary precision and do not overflow. Consequently, there are no constants denoting the IEEE-754 negative zero, infinity, and not-a-number values.  
+Numeric constants represent exact values of arbitrary precision and do not overflow. Consequently, there are no constants denoting the IEEE-754 negative zero, infinity, and not-a-number values.
 数字常量表示任意精度的精确值并且不会溢出。因此，没有常量表示 IEEE-754 负零、无穷大和非数字值。
 
-Constants may be [typed](https://go.dev/ref/spec#Types) or *untyped*. Literal constants, `true`, `false`, `iota`, and certain [constant expressions](https://go.dev/ref/spec#Constant_expressions) containing only untyped constant operands are untyped.  
+Constants may be typed or untyped.
+Literal constants, `true`, `false`, `iota`, and certain constant expressions containing only untyped constant operands are untyped.
 常量可以是类型化的，也可以是非类型化的。文字常量、 `true` 、 `false` 、 `iota` 以及仅包含无类型常量操作数的某些常量表达式是无类型的。
 
-A constant may be given a type explicitly by a [constant declaration](https://go.dev/ref/spec#Constant_declarations) or [conversion](https://go.dev/ref/spec#Conversions), or implicitly when used in a [variable declaration](https://go.dev/ref/spec#Variable_declarations) or an [assignment statement](https://go.dev/ref/spec#Assignment_statements) or as an operand in an [expression](https://go.dev/ref/spec#Expressions). It is an error if the constant value cannot be [represented](https://go.dev/ref/spec#Representability) as a value of the respective type. If the type is a type parameter, the constant is converted into a non-constant value of the type parameter.  
+A constant may be given a type explicitly by a constant declaration or conversion,
+or implicitly when used in a variable declaration or an assignment statement
+or as an operand in an expression.
+It is an error if the constant value cannot be represented as a value of the respective type.
+If the type is a type parameter, the constant is converted into a non-constant value of the type parameter.
 常量可以通过常量声明或转换显式地指定类型，或者在变量声明或赋值语句中使用或作为表达式中的操作数时隐式地指定类型。如果常量值不能表示为相应类型的值，则这是一个错误。如果类型是类型参数，则常量将转换为类型参数的非常量值。
 
-An untyped constant has a *default type* which is the type to which the constant is implicitly converted in contexts where a typed value is required, for instance, in a [short variable declaration](https://go.dev/ref/spec#Short_variable_declarations) such as `i := 0` where there is no explicit type. The default type of an untyped constant is `bool`, `rune`, `int`, `float64`, `complex128`, or `string` respectively, depending on whether it is a boolean, rune, integer, floating-point, complex, or string constant.  
+An untyped constant has a *default type* which is the type to which the constant is implicitly converted in contexts where a typed value is required, for instance,
+in a short variable declaration such as `i := 0` where there is no explicit type.
+The default type of an untyped constant is `bool`, `rune`, `int`, `float64`, `complex128`, or `string` respectively,
+depending on whether it is a boolean, rune, integer, floating-point, complex, or string constant.
 无类型常量具有默认类型，该类型是常量在需要类型化值的上下文中隐式转换为的类型，例如，在没有显式类型的短变量声明中，例如 `i := 0` 。无类型常量的默认类型为 `bool` 、 `rune` 、 `int` 、 `float64` 、 `complex128` 或 < b6> 分别取决于它是布尔值、符文值、整数、浮点值、复数还是字符串常量。
 
-Implementation restriction: Although numeric constants have arbitrary precision in the language, a compiler may implement them using an internal representation with limited precision. That said, every implementation must:  
+Implementation restriction: Although numeric constants have arbitrary precision in the language, a compiler may implement them using an internal representation with limited precision. That said, every implementation must:
 实现限制：尽管数字常量在语言中具有任意精度，但编译器可以使用精度有限的内部表示来实现它们。也就是说，每个实施都必须：
 
-- Represent integer constants with at least 256 bits.  
+- Represent integer constants with at least 256 bits.
   表示至少 256 位的整数常量。
-- Represent floating-point constants, including the parts of a complex constant, with a mantissa of at least 256 bits and a signed binary exponent of at least 16 bits.  
+
+- Represent floating-point constants, including the parts of a complex constant, with a mantissa of at least 256 bits and a signed binary exponent of at least 16 bits.
   表示浮点常量，包括复数常量的部分，尾数至少为 256 位，带符号二进制指数至少为 16 位。
-- Give an error if unable to represent an integer constant precisely.  
+
+- Give an error if unable to represent an integer constant precisely.
   如果无法精确表示整数常量，则给出错误。
-- Give an error if unable to represent a floating-point or complex constant due to overflow.  
+
+- Give an error if unable to represent a floating-point or complex constant due to overflow.
   如果由于溢出而无法表示浮点或复数常量，则给出错误。
-- Round to the nearest representable constant if unable to represent a floating-point or complex constant due to limits on precision.  
+
+- Round to the nearest representable constant if unable to represent a floating-point or complex constant due to limits on precision.
   如果由于精度限制而无法表示浮点或复数常量，则舍入到最接近的可表示常量。
 
-These requirements apply both to literal constants and to the result of evaluating [constant expressions](https://go.dev/ref/spec#Constant_expressions).  
+These requirements apply both to literal constants and to the result of evaluating constant expressions.
 这些要求既适用于文字常量，也适用于计算常量表达式的结果。
 
-## Variables 变量
+## Variables
+变量
 
-A variable is a storage location for holding a *value*. The set of permissible values is determined by the variable's *[type](https://go.dev/ref/spec#Types)*.  
+A variable is a storage location for holding a *value*. The set of permissible values is determined by the variable's *type*.
 变量是保存值的存储位置。允许值的集合由变量的类型确定。
 
-A [variable declaration](https://go.dev/ref/spec#Variable_declarations) or, for function parameters and results, the signature of a [function declaration](https://go.dev/ref/spec#Function_declarations) or [function literal](https://go.dev/ref/spec#Function_literals) reserves storage for a named variable. Calling the built-in function [`new`](https://go.dev/ref/spec#Allocation) or taking the address of a [composite literal](https://go.dev/ref/spec#Composite_literals) allocates storage for a variable at run time. Such an anonymous variable is referred to via a (possibly implicit) [pointer indirection](https://go.dev/ref/spec#Address_operators).  
+A variable declaration or, for function parameters and results, the signature of a function declaration or function literal reserves storage for a named variable.
+Calling the built-in function `new` or taking the address of a composite literal allocates storage for a variable at run time.
+Such an anonymous variable is referred to via a (possibly implicit) pointer indirection.
 变量声明，或者对于函数参数和结果，函数声明或函数文字的签名为命名变量保留存储。调用内置函数 `new` 或获取复合文字的地址会在运行时为变量分配存储空间。这样的匿名变量是通过（可能是隐式的）指针间接引用的。
 
-*Structured* variables of [array](https://go.dev/ref/spec#Array_types), [slice](https://go.dev/ref/spec#Slice_types), and [struct](https://go.dev/ref/spec#Struct_types) types have elements and fields that may be [addressed](https://go.dev/ref/spec#Address_operators) individually. Each such element acts like a variable.  
+*Structured* variables of array, slice, and struct types have elements and fields that may be addressed individually. Each such element acts like a variable.
 数组、切片和结构类型的结构化变量具有可以单独寻址的元素和字段。每个这样的元素就像一个变量。
 
-The *static type* (or just *type*) of a variable is the type given in its declaration, the type provided in the `new` call or composite literal, or the type of an element of a structured variable. Variables of interface type also have a distinct *dynamic type*, which is the (non-interface) type of the value assigned to the variable at run time (unless the value is the predeclared identifier `nil`, which has no type). The dynamic type may vary during execution but values stored in interface variables are always [assignable](https://go.dev/ref/spec#Assignability) to the static type of the variable.  
-变量的静态类型（或仅类型）是其声明中给出的类型、 `new` 调用或复合文字中提供的类型，或者结构化变量的元素的类型。接口类型的变量也有一个独特的动态类型，它是运行时分配给变量的值的（非接口）类型（除非该值是预先声明的标识符 `nil` ，它没有类型）。动态类型在执行期间可能会发生变化，但存储在接口变量中的值始终可分配给变量的静态类型。
+The *static type* (or just *type*) of a variable is the type given in its declaration, the type provided in the `new` call or composite literal, or the type of an element of a structured variable.
+Variables of interface type also have a distinct *dynamic type*, which is the (non-interface) type of the value assigned to the variable at run time (unless the value is the predeclared identifier `nil`, which has no type).
+The dynamic type may vary during execution but values stored in interface variables are always assignable to the static type of the variable.
+变量的静态类型（或仅类型）是其声明中给出的类型、 `new` 调用或复合文字中提供的类型，或者结构化变量的元素的类型。
+接口类型的变量也有一个独特的动态类型，它是运行时分配给变量的值的（非接口）类型（除非该值是预先声明的标识符 `nil` ，它没有类型）。
+动态类型在执行期间可能会发生变化，但存储在接口变量中的值始终可分配给变量的静态类型。
 
+```
 var x interface{}  // x is nil and has static type interface{}
 var v *T           // v has value nil, static type *T
 x = 42             // x has value 42 and dynamic type int
 x = v              // x has value (*T)(nil) and dynamic type *T
+```
 
-A variable's value is retrieved by referring to the variable in an [expression](https://go.dev/ref/spec#Expressions); it is the most recent value [assigned](https://go.dev/ref/spec#Assignment_statements) to the variable. If a variable has not yet been assigned a value, its value is the [zero value](https://go.dev/ref/spec#The_zero_value) for its type.  
+A variable's value is retrieved by referring to the variable in an expression; it is the most recent value assigned to the variable. If a variable has not yet been assigned a value, its value is the zero value for its type.
 通过引用表达式中的变量来检索变量的值；它是分配给变量的最新值。如果尚未为变量赋值，则其值是其类型的零值。
 
-## Types 类型
+## Types
+类型
 
-A type determines a set of values together with operations and methods specific to those values. A type may be denoted by a *type name*, if it has one, which must be followed by [type arguments](https://go.dev/ref/spec#Instantiations) if the type is generic. A type may also be specified using a *type literal*, which composes a type from existing types.  
+A type determines a set of values together with operations and methods specific to those values.
+A type may be denoted by a *type name*, if it has one,
+which must be followed by type arguments if the type is generic.
+A type may also be specified using a *type literal*, which composes a type from existing types.
 类型确定一组值以及特定于这些值的操作和方法。如果类型有类型名称，则可以用类型名称来表示；如果该类型是泛型，则类型名称后面必须跟有类型参数。类型也可以使用类型文字来指定，它由现有类型组成一个类型。
 
-Type      = [TypeName](https://go.dev/ref/spec#TypeName) [ [TypeArgs](https://go.dev/ref/spec#TypeArgs) ] | [TypeLit](https://go.dev/ref/spec#TypeLit) | "(" [Type](https://go.dev/ref/spec#Type) ")" .
-TypeName  = [identifier](https://go.dev/ref/spec#identifier) | [QualifiedIdent](https://go.dev/ref/spec#QualifiedIdent) .
-TypeArgs  = "[" [TypeList](https://go.dev/ref/spec#TypeList) [ "," ] "]" .
-TypeList  = [Type](https://go.dev/ref/spec#Type) { "," [Type](https://go.dev/ref/spec#Type) } .
-TypeLit   = [ArrayType](https://go.dev/ref/spec#ArrayType) | [StructType](https://go.dev/ref/spec#StructType) | [PointerType](https://go.dev/ref/spec#PointerType) | [FunctionType](https://go.dev/ref/spec#FunctionType) | [InterfaceType](https://go.dev/ref/spec#InterfaceType) |
-            [SliceType](https://go.dev/ref/spec#SliceType) | [MapType](https://go.dev/ref/spec#MapType) | [ChannelType](https://go.dev/ref/spec#ChannelType) .
+```
+Type      = TypeName [ TypeArgs ] | TypeLit | "(" Type ")" .
+TypeName  = identifier | QualifiedIdent .
+TypeArgs  = "[" TypeList [ "," ] "]" .
+TypeList  = Type { "," Type } .
+TypeLit   = ArrayType | StructType | PointerType | FunctionType | InterfaceType |
+            SliceType | MapType | ChannelType .
+```
 
-The language [predeclares](https://go.dev/ref/spec#Predeclared_identifiers) certain type names. Others are introduced with [type declarations](https://go.dev/ref/spec#Type_declarations) or [type parameter lists](https://go.dev/ref/spec#Type_parameter_declarations). *Composite types*—array, struct, pointer, function, interface, slice, map, and channel types—may be constructed using type literals.  
+The language predeclares certain type names.
+Others are introduced with type declarations or type parameter lists. 
+*Composite types*—array, struct, pointer, function, interface, slice, map, and channel types—may be constructed using type literals.
 该语言预先声明了某些类型名称。其他的则通过类型声明或类型参数列表来引入。复合类型（数组、结构体、指针、函数、接口、切片、映射和通道类型）可以使用类型文字来构造。
 
-Predeclared types, defined types, and type parameters are called *named types*. An alias denotes a named type if the type given in the alias declaration is a named type.  
+Predeclared types, defined types, and type parameters are called *named types*. An alias denotes a named type if the type given in the alias declaration is a named type.
 预声明类型、定义类型和类型参数称为命名类型。如果别名声明中给定的类型是命名类型，则别名表示命名类型。
 
 ### Boolean types 布尔类型
 
-A *boolean type* represents the set of Boolean truth values denoted by the predeclared constants `true` and `false`. The predeclared boolean type is `bool`; it is a [defined type](https://go.dev/ref/spec#Type_definitions).  
+A **boolean type** represents the set of Boolean truth values denoted by the predeclared constants `true` and `false`.
+The predeclared boolean type is `bool`;
+it is a defined type.
 布尔类型表示由预先声明的常量 `true` 和 `false` 表示的布尔真值集。预声明的布尔类型是 `bool` ；它是一个定义的类型。
 
 ### Numeric types 数字类型
 
-An *integer*, *floating-point*, or *complex* type represents the set of integer, floating-point, or complex values, respectively. They are collectively called *numeric types*. The predeclared architecture-independent numeric types are:  
+An **integer**, **floating-point**, or **complex** type represents the set of integer, floating-point, or complex values, respectively. They are collectively called **numeric types**.
+The predeclared architecture-independent numeric types are:
 整数、浮点或复数类型分别表示整数、浮点或复数值的集合。它们统称为数字类型。预先声明的独立于体系结构的数字类型是：
 
+```
 uint8       the set of all unsigned  8-bit integers (0 to 255)
 uint16      the set of all unsigned 16-bit integers (0 to 65535)
 uint32      the set of all unsigned 32-bit integers (0 to 4294967295)
 uint64      the set of all unsigned 64-bit integers (0 to 18446744073709551615)
+
 int8        the set of all signed  8-bit integers (-128 to 127)
 int16       the set of all signed 16-bit integers (-32768 to 32767)
 int32       the set of all signed 32-bit integers (-2147483648 to 2147483647)
 int64       the set of all signed 64-bit integers (-9223372036854775808 to 9223372036854775807)
+
 float32     the set of all IEEE-754 32-bit floating-point numbers
 float64     the set of all IEEE-754 64-bit floating-point numbers
+
 complex64   the set of all complex numbers with float32 real and imaginary parts
 complex128  the set of all complex numbers with float64 real and imaginary parts
+
 byte        alias for uint8
 rune        alias for int32
+```
 
-The value of an *n*-bit integer is *n* bits wide and represented using [two's complement arithmetic](https://en.wikipedia.org/wiki/Two's_complement).  
+The value of an *n*-bit integer is *n* bits wide and represented using [two's complement arithmetic](https://en.wikipedia.org/wiki/Two's_complement).
 n 位整数的值是 n 位宽，并使用二进制补码算术表示。
 
 There is also a set of predeclared integer types with implementation-specific sizes:
+还有一组具有特定于实现的大小的预声明整数类型：
 
+```
 uint     either 32 or 64 bits
 int      same size as uint
 uintptr  an unsigned integer large enough to store the uninterpreted bits of a pointer value
+```
 
-To avoid portability issues all numeric types are [defined types](https://go.dev/ref/spec#Type_definitions) and thus distinct except `byte`, which is an [alias](https://go.dev/ref/spec#Alias_declarations) for `uint8`, and `rune`, which is an alias for `int32`. Explicit conversions are required when different numeric types are mixed in an expression or assignment. For instance, `int32` and `int` are not the same type even though they may have the same size on a particular architecture.
+To avoid portability issues all numeric types are defined types and thus distinct except `byte`, which is an alias for `uint8`, and `rune`, which is an alias for `int32`.
+Explicit conversions are required when different numeric types are mixed in an expression or assignment.
+For instance, `int32` and `int` are not the same type even though they may have the same size on a particular architecture.
+为了避免可移植性问题，所有数字类型都是已定义的类型，因此除了 byte （ uint8 的别名）和 rune （< 的别名）之外都是不同的。 b3>。当不同的数值类型混合在表达式或赋值中时，需要显式转换。例如， int32 和 int 不是同一类型，尽管它们在特定架构上可能具有相同的大小。
 
 ### String types
 
-A *string type* represents the set of string values. A string value is a (possibly empty) sequence of bytes. The number of bytes is called the length of the string and is never negative. Strings are immutable: once created, it is impossible to change the contents of a string. The predeclared string type is `string`; it is a [defined type](https://go.dev/ref/spec#Type_definitions).
+A **string type** represents the set of string values.
+A string value is a (possibly empty) sequence of bytes.
+The number of bytes is called the length of the string and is never negative.
+Strings are immutable: once created, it is impossible to change the contents of a string.
+The predeclared string type is `string`; it is a defined type.
+字符串类型表示字符串值的集合。字符串值是一个（可能为空）字节序列。字节数称为字符串的长度，并且永远不会是负数。字符串是不可变的：一旦创建，就不可能更改字符串的内容。预声明的字符串类型是 string ；它是一个定义的类型。
 
-The length of a string `s` can be discovered using the built-in function [`len`](https://go.dev/ref/spec#Length_and_capacity). The length is a compile-time constant if the string is a constant. A string's bytes can be accessed by integer [indices](https://go.dev/ref/spec#Index_expressions) 0 through `len(s)-1`. It is illegal to take the address of such an element; if `s[i]` is the `i`'th byte of a string, `&s[i]` is invalid.
+The length of a string `s` can be discovered using the built-in function `len`. The length is a compile-time constant if the string is a constant.
+A string's bytes can be accessed by integer indices 0 through `len(s)-1`. It is illegal to take the address of such an element; if `s[i]` is the `i`'th byte of a string, `&s[i]` is invalid.
+字符串 s 的长度可以使用内置函数 len 发现。如果字符串是常量，则长度是编译时常量。字符串的字节可以通过整数索引 0 到 len(s)-1 访问。
+获取此类元素的地址是非法的；如果 s[i] 是字符串的第 i 个字节，则 &s[i] 无效。
 
 ### Array types 数组类型
 
